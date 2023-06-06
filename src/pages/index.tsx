@@ -69,6 +69,19 @@ const Home: NextPage = () => {
         }}
         onClick={handleClick}
       />
+
+      <motion.img
+        src="./calendar.png"
+        alt="title"
+        animate={click >= 4 ? { top: 0 } : { top: 1057 }}
+        transition={{ duration: 1 }}
+        initial={{
+          position: "fixed",
+          left: 136,
+          top: 1057,
+        }}
+        onClick={handleClick}
+      />
     </>
   );
 };
