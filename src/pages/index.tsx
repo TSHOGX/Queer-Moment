@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, MouseEvent, useState } from "react";
 import { motion } from "framer-motion";
 
 const Home: NextPage = () => {
@@ -9,12 +9,65 @@ const Home: NextPage = () => {
   const [content, setContent] = useState("");
   const [name, setName] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("Content:", content);
-    console.log("Name:", name);
-    setContent("");
-    setName("");
+    const body = { name, content };
+    try {
+      const response = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (response.status !== 200) {
+        console.log("something went wrong");
+        //set an error banner
+      } else {
+        setContent("");
+        setName("");
+        console.log("form submitted successfully !!!");
+        // close the form
+      }
+    } catch (error) {
+      console.log("there was an error submitting", error);
+    }
+  };
+
+  // const handleClickBtnWe = async (e: MouseEvent, id: number) => {
+  const fetchOne = async (e: MouseEvent, id: number) => {
+    try {
+      const response = await fetch("/api/inquiry", {
+        method: "GET",
+        headers: { "data-range": String(id) },
+      });
+
+      if (response.status !== 200) {
+        console.log("Something went wrong");
+      } else {
+        const data = await response.json();
+        console.log("Fetched content:", data.oneMsg);
+      }
+    } catch (error) {
+      console.log("There was an error fetching:", error);
+    }
+  };
+
+  const handleClickBtnWe = async (e: MouseEvent) => {
+    // const fetchAll = async (e: MouseEvent) => {
+    try {
+      const response = await fetch("/api/inquiry", {
+        method: "GET",
+        headers: { "data-range": "all" },
+      });
+
+      if (response.status !== 200) {
+        console.log("Something went wrong");
+      } else {
+        const data = await response.json();
+        console.log("Fetched content:", data.allMsg);
+      }
+    } catch (error) {
+      console.log("There was an error fetching:", error);
+    }
   };
 
   const handleClick = () => {
@@ -25,10 +78,10 @@ const Home: NextPage = () => {
     setBtnYou(!btnYou);
   };
 
-  // TODO: only one button can be active at a time
-  const handleClickBtnWe = () => {
-    setBtnWe(!btnWe);
-  };
+  // // TODO: only one button can be active at a time
+  // const handleClickBtnWe = () => {
+  //   setBtnWe(!btnWe);
+  // };
 
   return (
     <>
@@ -129,6 +182,7 @@ const Home: NextPage = () => {
         <div></div>
       )}
 
+      {/* <button onClick={(e) => handleClickBtnWe(e, 2)}> */}
       <button onClick={handleClickBtnWe}>
         <motion.img
           src={btnWe ? "./weOpen.svg" : "./we.svg"}
