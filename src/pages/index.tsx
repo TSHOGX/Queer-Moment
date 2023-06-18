@@ -1,6 +1,7 @@
 import { NextPage } from "next";
-import React, { FormEvent, MouseEvent, useState } from "react";
-import { motion } from "framer-motion";
+import React, { FormEvent, MouseEvent, useEffect, useState } from "react";
+import { motion, useAnimationControls } from "framer-motion";
+import StyledDatePicker from "~/component/datePicker";
 
 const Home: NextPage = () => {
   const [click, setClick] = useState(0);
@@ -51,8 +52,8 @@ const Home: NextPage = () => {
     }
   };
 
-  const handleClickBtnWe = async (e: MouseEvent) => {
-    // const fetchAll = async (e: MouseEvent) => {
+  // const handleClickBtnWe = async (e: MouseEvent) => {
+  const fetchAll = async (e: MouseEvent) => {
     try {
       const response = await fetch("/api/inquiry", {
         method: "GET",
@@ -78,46 +79,58 @@ const Home: NextPage = () => {
     setBtnYou(!btnYou);
   };
 
-  // // TODO: only one button can be active at a time
-  // const handleClickBtnWe = () => {
-  //   setBtnWe(!btnWe);
-  // };
+  // TODO: only one button can be active at a time
+  const handleClickBtnWe = () => {
+    setBtnWe(!btnWe);
+  };
+
+  const controls = useAnimationControls();
+
+  useEffect(() => {
+    controls.start((i) => i);
+  }, []);
 
   return (
-    <>
+    <main>
       <motion.img
         src="./Rectangle 7.png"
         alt="background"
-        animate={click >= 1 ? { scale: 2.5 } : { scale: 1.1 }}
-        transition={{ duration: 0.5 }}
+        custom={{ scale: 2.5, transition: { duration: 0.5, delay: 1 * 0.5 } }}
+        animate={controls}
+        className="background-container"
         initial={{
-          position: "fixed",
-          top: 240,
+          scale: 1,
         }}
         onClick={handleClick}
       />
 
-      <motion.img
-        src="./title.svg"
-        alt="title"
-        animate={click >= 2 ? { top: 52 } : { top: 385 }}
-        transition={{ duration: 0.5 }}
+      <motion.div
+        custom={{
+          marginTop: 40,
+          transition: { duration: 0.5, delay: 2 * 0.5 },
+        }}
+        animate={controls}
+        // className="homepage"
         initial={{
-          position: "fixed",
-          height: 74.15,
-          width: 339.88,
-          left: 25,
-          top: 385,
+          marginTop: 385,
         }}
         onClick={handleClick}
-      />
+      >
+        <div>
+          <h1>QUEER MOMENT</h1>
+        </div>
+        <div className="container">
+          <p>共同</p>
+          <p>度过</p>
+        </div>
+      </motion.div>
 
       <button onClick={handleClickBtnYou}>
         <motion.img
           src={btnYou ? "./youOpen.svg" : "./you.svg"}
           alt="btnYou"
-          animate={click >= 3 ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          custom={{ opacity: 1, transition: { duration: 0.5, delay: 3 * 0.5 } }}
+          animate={controls}
           initial={{
             position: "fixed",
             height: 44,
@@ -144,10 +157,11 @@ const Home: NextPage = () => {
             zIndex: 999,
           }}
         >
-          <div className=" ml-[16px] mt-4 flex h-[43px] w-[242px] items-center justify-between bg-[#F3D1F9] text-sm text-[#7C7C7C] ">
+          {/* <div className=" ml-[16px] mt-4 flex h-[43px] w-[242px] items-center justify-between bg-[#F3D1F9] text-sm text-[#7C7C7C] ">
             <div>添加至</div>
             <div>time</div>
-          </div>
+          </div> */}
+          <StyledDatePicker />
           <form
             onSubmit={handleSubmit}
             className=" ml-[16px] mt-1 flex h-60 w-[242px] flex-col gap-2"
@@ -171,7 +185,10 @@ const Home: NextPage = () => {
             <div className="flex w-full justify-center">
               <button
                 type="submit"
-                className=" rounded-md bg-[#BE6AFF] px-4 py-[1px] text-sm text-white shadow-sm"
+                disabled={!content || !name}
+                className={`rounded-md px-4 py-[1px] text-sm text-white shadow-sm ${
+                  !content || !name ? "bg-black" : "bg-[#BE6AFF]"
+                }`}
               >
                 提 交
               </button>
@@ -187,8 +204,8 @@ const Home: NextPage = () => {
         <motion.img
           src={btnWe ? "./weOpen.svg" : "./we.svg"}
           alt="btnWe"
-          animate={click >= 3 ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          custom={{ opacity: 1, transition: { duration: 0.5, delay: 3 * 0.5 } }}
+          animate={controls}
           initial={{
             position: "fixed",
             height: 56,
@@ -202,17 +219,20 @@ const Home: NextPage = () => {
       </button>
 
       {btnWe ? (
-        <img
-          src={"./about.svg"}
-          alt="about"
-          style={{
-            position: "fixed",
-            left: 19,
-            top: 150,
-            zIndex: 999,
-          }}
-          onClick={handleClick}
-        />
+        <div className="intro">
+          <div className="intro-container">
+            <div className="intro-logo">
+              <img src="./image/Screenshot 2023-06-11 at 10.09.17 PM.png" />
+            </div>
+            <div className="intro-content">
+              <p>
+                由酷儿群体共同撰写的时刻日记。我们希望文字可以连接时间和故事，连接着曾经、当下和未来的属于酷儿的瞬间。在声音不断被屏蔽、删除的时代，希望这里成为你的安全之地。
+                既在，记载，勿忘。 让我们共同度过。
+              </p>
+            </div>
+          </div>
+          <div className="intro-contact">联系方式 邮箱： Ins： 小红书： </div>
+        </div>
       ) : (
         <div></div>
       )}
@@ -220,8 +240,8 @@ const Home: NextPage = () => {
       <motion.img
         src="./calendar.svg"
         alt="calendar"
-        animate={click >= 3 ? { top: 0 } : { top: 1057 }}
-        transition={{ duration: 2 }}
+        custom={{ top: 0, transition: { duration: 2, delay: 3 * 0.5 } }}
+        animate={controls}
         initial={{
           position: "fixed",
           left: 136,
@@ -229,7 +249,7 @@ const Home: NextPage = () => {
         }}
         onClick={handleClick}
       />
-    </>
+    </main>
   );
 };
 
