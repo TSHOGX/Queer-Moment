@@ -14,6 +14,14 @@ interface Post {
   date: string;
 }
 
+interface Datas {
+  allMsg: Post[];
+}
+
+interface Data {
+  oneMsg: Post[];
+}
+
 const Home: NextPage = () => {
   const [btnYou, setBtnYou] = useState(false);
   const [btnWe, setBtnWe] = useState(false);
@@ -55,7 +63,7 @@ const Home: NextPage = () => {
       if (response.status !== 200) {
         console.log("Something went wrong");
       } else {
-        const data = await response.json();
+        const data: Data = await response.json();
         console.log("Fetched content:", data.oneMsg);
       }
     } catch (error) {
@@ -73,7 +81,7 @@ const Home: NextPage = () => {
       if (response.status !== 200) {
         console.log("Something went wrong");
       } else {
-        const data = await response.json();
+        const data: Datas = await response.json();
         console.log("Fetched", data.allMsg);
         data.allMsg.sort(
           (a: Post, b: Post) =>
