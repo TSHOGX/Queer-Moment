@@ -61,7 +61,7 @@ async function createMsg(req: NextApiRequest, res: NextApiResponse) {
     const newEntry: Message = await prisma.message.create({
       data: {
         name: body.name != null ? body.name : undefined,
-        // date: body.date,
+        date: body.selectedDate,
         content: body.content != null ? body.content : undefined,
       },
     });

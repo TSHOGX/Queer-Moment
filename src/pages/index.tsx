@@ -1,18 +1,30 @@
 import { NextPage } from "next";
 import React, { FormEvent, MouseEvent, useEffect, useState } from "react";
 import { motion, useAnimationControls } from "framer-motion";
-import StyledDatePicker from "~/component/datePicker";
+
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs, { Dayjs } from "dayjs";
+
+interface Post {
+  id: number;
+  name: string;
+  date: string;
+}
 
 const Home: NextPage = () => {
-  const [click, setClick] = useState(0);
   const [btnYou, setBtnYou] = useState(false);
   const [btnWe, setBtnWe] = useState(false);
   const [content, setContent] = useState("");
   const [name, setName] = useState("");
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const [posts, setPosts] = useState<Post[]>([]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const body = { name, content };
+    const body = { selectedDate, name, content };
     try {
       const response = await fetch("/api/inquiry", {
         method: "POST",
@@ -33,7 +45,6 @@ const Home: NextPage = () => {
     }
   };
 
-  // const handleClickBtnWe = async (e: MouseEvent, id: number) => {
   const fetchOne = async (e: MouseEvent, id: number) => {
     try {
       const response = await fetch("/api/inquiry", {
@@ -52,8 +63,7 @@ const Home: NextPage = () => {
     }
   };
 
-  // const handleClickBtnWe = async (e: MouseEvent) => {
-  const fetchAll = async (e: MouseEvent) => {
+  const fetchAll = async () => {
     try {
       const response = await fetch("/api/inquiry", {
         method: "GET",
@@ -64,26 +74,35 @@ const Home: NextPage = () => {
         console.log("Something went wrong");
       } else {
         const data = await response.json();
-        console.log("Fetched content:", data.allMsg);
+        console.log("Fetched", data.allMsg);
+        data.allMsg.sort(
+          (a: Post, b: Post) =>
+            new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
+        setPosts(data.allMsg);
       }
     } catch (error) {
       console.log("There was an error fetching:", error);
     }
   };
 
-  const handleClick = () => {
-    setClick(click + 1);
-  };
+  useEffect(() => {
+    fetchAll();
+  }, []);
 
   const handleClickBtnYou = () => {
-    setBtnYou(!btnYou);
+    if (!btnWe) {
+      setBtnYou(!btnYou);
+    }
   };
 
-  // TODO: only one button can be active at a time
   const handleClickBtnWe = () => {
-    setBtnWe(!btnWe);
+    if (!btnYou) {
+      setBtnWe(!btnWe);
+    }
   };
 
+  // automatically play animation
   const controls = useAnimationControls();
 
   useEffect(() => {
@@ -101,7 +120,6 @@ const Home: NextPage = () => {
         initial={{
           scale: 1,
         }}
-        onClick={handleClick}
       />
 
       <motion.div
@@ -114,7 +132,6 @@ const Home: NextPage = () => {
         initial={{
           marginTop: 385,
         }}
-        onClick={handleClick}
       >
         <div>
           <h1>QUEER MOMENT</h1>
@@ -139,7 +156,6 @@ const Home: NextPage = () => {
             top: 321,
             opacity: 0,
           }}
-          onClick={handleClick}
         />
       </button>
 
@@ -157,11 +173,20 @@ const Home: NextPage = () => {
             zIndex: 999,
           }}
         >
-          {/* <div className=" ml-[16px] mt-4 flex h-[43px] w-[242px] items-center justify-between bg-[#F3D1F9] text-sm text-[#7C7C7C] ">
+          <div className="ml-[16px] mt-4 flex h-[43px] w-[242px] items-center justify-between bg-[#F3D1F9] px-2 text-sm text-[#7C7C7C] ">
             <div>添加至</div>
-            <div>time</div>
-          </div> */}
-          <StyledDatePicker />
+            <ThemeProvider theme={theme}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  value={selectedDate}
+                  defaultValue={dayjs()}
+                  onChange={(newValue) => setSelectedDate(newValue)}
+                  sx={{ width: "55%" }}
+                  slotProps={{ textField: { variant: "standard" } }}
+                />
+              </LocalizationProvider>
+            </ThemeProvider>
+          </div>
           <form
             onSubmit={handleSubmit}
             className=" ml-[16px] mt-1 flex h-60 w-[242px] flex-col gap-2"
@@ -214,7 +239,6 @@ const Home: NextPage = () => {
             top: 706,
             opacity: 0,
           }}
-          onClick={handleClick}
         />
       </button>
 
@@ -231,26 +255,64 @@ const Home: NextPage = () => {
               </p>
             </div>
           </div>
-          <div className="intro-contact">联系方式 邮箱： Ins： 小红书： </div>
+          <div className="intro-contact">
+            <div>联系方式</div>
+            <div>邮箱: </div>
+            <div>Ins: </div>
+            <div>小红书：</div>
+          </div>
         </div>
       ) : (
         <div></div>
       )}
 
-      <motion.img
-        src="./calendar.svg"
-        alt="calendar"
+      <motion.div
         custom={{ top: 0, transition: { duration: 2, delay: 3 * 0.5 } }}
         animate={controls}
+        className="post"
         initial={{
           position: "fixed",
           left: 136,
           top: 1057,
         }}
-        onClick={handleClick}
-      />
+      >
+        {posts.map((post) => (
+          <div key={post.id} onClick={(e) => fetchOne(e, post.id)}>
+            {`${new Date(post.date).getFullYear()} {${new Date(post.date)
+              .getMonth()
+              .toString()
+              .padStart(2, "0")}/${new Date(post.date).getDate()}} {${
+              post.name
+            }}`}
+          </div>
+        ))}
+      </motion.div>
     </main>
   );
 };
 
 export default Home;
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#F3D1F9",
+    },
+  },
+  components: {
+    MuiIconButton: {
+      styleOverrides: {
+        sizeMedium: {
+          color: "#7C7C7C",
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        inputAdornedEnd: {
+          color: "#7C7C7C",
+        },
+      },
+    },
+  },
+});
