@@ -1,5 +1,11 @@
 import { NextPage } from "next";
-import React, { FormEvent, MouseEvent, useEffect, useState } from "react";
+import React, {
+  FormEvent,
+  MouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { motion, useAnimationControls } from "framer-motion";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -29,6 +35,9 @@ const Home: NextPage = () => {
   const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
   const [posts, setPosts] = useState<Post[]>([]);
+  // const [showBar, setShowBar] = useState(false);
+  const [newPost, setNewPost] = useState("");
+  const scrollToRef = useRef<HTMLLIElement>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -41,12 +50,13 @@ const Home: NextPage = () => {
       });
       if (response.status !== 200) {
         console.log("something went wrong");
-        //set an error banner
       } else {
         setContent("");
         setName("");
+        setBtnYou(false);
+        // setShowBar(true);
+        setNewPost(selectedDate?.toString() + name + content);
         console.log("form submitted successfully !!!");
-        // close the form
       }
     } catch (error) {
       console.log("there was an error submitting", error);
@@ -77,26 +87,34 @@ const Home: NextPage = () => {
         method: "GET",
         headers: { "data-range": "all" },
       });
-
       if (response.status !== 200) {
         console.log("Something went wrong");
       } else {
         const data: Datas = await response.json();
         console.log("Fetched", data.allMsg);
-        data.allMsg.sort(
-          (a: Post, b: Post) =>
-            new Date(a.date).getTime() - new Date(b.date).getTime()
-        );
+        data.allMsg.sort((a: Post, b: Post) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          const yearDiff = dateA.getFullYear() - dateB.getFullYear();
+          if (yearDiff !== 0) {
+            return yearDiff;
+          }
+          const monthDiff = dateA.getMonth() - dateB.getMonth();
+          if (monthDiff !== 0) {
+            return monthDiff;
+          }
+          const dayDiff = dateA.getDate() - dateB.getDate();
+          if (dayDiff !== 0) {
+            return dayDiff;
+          }
+          return dateA.getTime() - dateB.getTime();
+        });
         setPosts(data.allMsg);
       }
     } catch (error) {
       console.log("There was an error fetching:", error);
     }
   };
-
-  useEffect(() => {
-    fetchAll();
-  }, []);
 
   const handleClickBtnYou = () => {
     if (!btnWe) {
@@ -110,6 +128,20 @@ const Home: NextPage = () => {
     }
   };
 
+  // scroll animation
+  useEffect(() => {
+    fetchAll();
+    console.log("scroll animation", scrollToRef.current);
+    setTimeout(() => {
+      if (scrollToRef.current) {
+        scrollToRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }, 100);
+  }, [newPost]);
+
   // automatically play animation
   const controls = useAnimationControls();
 
@@ -117,10 +149,20 @@ const Home: NextPage = () => {
     controls.start((i) => i);
   }, []);
 
+  // new post animation
+  const postVariants = {
+    pre: { opacity: 0, backgroundColor: "white" },
+    visible: {
+      opacity: 1,
+      backgroundColor: "transparent",
+      transition: { duration: 1.5, delay: 0.5 },
+    },
+  };
+
   return (
     <main>
       <motion.img
-        src="./Rectangle 7.png"
+        src="./background.png"
         alt="background"
         custom={{ scale: 2.5, transition: { duration: 0.5, delay: 1 * 0.5 } }}
         animate={controls}
@@ -167,7 +209,7 @@ const Home: NextPage = () => {
         />
       </button>
 
-      {btnYou ? (
+      {btnYou && (
         <div
           style={{
             backgroundImage: "url(./formBg.svg)",
@@ -228,11 +270,8 @@ const Home: NextPage = () => {
             </div>
           </form>
         </div>
-      ) : (
-        <div></div>
       )}
 
-      {/* <button onClick={(e) => handleClickBtnWe(e, 2)}> */}
       <button onClick={handleClickBtnWe}>
         <motion.img
           src={btnWe ? "./weOpen.svg" : "./we.svg"}
@@ -250,7 +289,7 @@ const Home: NextPage = () => {
         />
       </button>
 
-      {btnWe ? (
+      {btnWe && (
         <div className="intro">
           <div className="intro-container">
             <div className="intro-logo">
@@ -270,31 +309,57 @@ const Home: NextPage = () => {
             <div>小红书：</div>
           </div>
         </div>
-      ) : (
-        <div></div>
       )}
 
-      <motion.div
+      <motion.ul
+        layout
         custom={{ top: 0, transition: { duration: 2, delay: 3 * 0.5 } }}
         animate={controls}
-        className="post"
+        className="posts"
         initial={{
           position: "fixed",
-          left: 136,
-          top: 1057,
+          left: "34%",
+          top: "100%",
+          overflow: "scroll",
+          height: "100%",
         }}
       >
         {posts.map((post) => (
-          <div key={post.id} onClick={(e) => fetchOne(e, post.id)}>
-            {`${new Date(post.date).getFullYear()} {${new Date(post.date)
-              .getMonth()
+          <motion.li
+            layout
+            variants={postVariants}
+            initial="pre"
+            animate="visible"
+            key={post.id}
+            onClick={(e) => fetchOne(e, post.id)}
+            ref={scrollToRef}
+          >
+            {`${new Date(post.date).getFullYear()} {${(
+              new Date(post.date).getMonth() + 1
+            )
               .toString()
-              .padStart(2, "0")}/${new Date(post.date).getDate()}} {${
-              post.name
-            }}`}
-          </div>
+              .padStart(2, "0")}/${new Date(post.date)
+              .getDate()
+              .toString()
+              .padStart(2, "0")}} {${post.name}}`}
+          </motion.li>
         ))}
-      </motion.div>
+      </motion.ul>
+
+      {/* {showBar && (
+        <motion.div
+          animate={{ opacity: 1, transition: { duration: 1 } }}
+          initial={{
+            width: "60%",
+            height: "10px",
+            backgroundColor: "white",
+            position: "fixed",
+            top: "40%",
+            // left: "30%",
+            opacity: 0,
+          }}
+        />
+      )} */}
     </main>
   );
 };
