@@ -309,7 +309,7 @@ const Home: NextPage = () => {
             />
             <defs>
               <filter
-                id="filter0_d_51_1005"
+                id="filter0_d_51_913"
                 x="4"
                 y="2.14355"
                 width="32"
@@ -437,7 +437,7 @@ const Home: NextPage = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g filter="url(#filter0_d_51_914)">
+            <g filter="url(#filter0_d_51_1002)">
               <motion.path fill={weFill} d={wePath} />
             </g>
             <path
@@ -514,17 +514,14 @@ const Home: NextPage = () => {
         </div>
       </motion.div>
 
+      {/* calendar */}
       <motion.ul
         layout
         custom={{ top: 0, transition: { duration: 2, delay: 3 * 0.8 } }}
         animate={controls}
         className="posts"
         initial={{
-          position: "fixed",
-          left: "34%",
           top: "100%",
-          overflow: "scroll",
-          height: "100%",
         }}
       >
         {posts.map((post) => (
