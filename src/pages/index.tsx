@@ -206,7 +206,7 @@ const Home: NextPage = () => {
   // scroll animation
   useEffect(() => {
     fetchAll();
-    // console.log("scroll animation", scrollToRef.current?.value);
+    console.log("scroll animation", scrollToRef.current?.value);
     setTimeout(() => {
       if (scrollToRef.current) {
         scrollToRef.current.scrollIntoView({
@@ -229,12 +229,21 @@ const Home: NextPage = () => {
     pre: {
       opacity: 1,
       backgroundColor: "rgba(0, 0, 0, 0)",
+      textcolor: "rgba(255, 255, 255, 1)",
     },
     visible: {
-      opacity: [0, 1],
-      backgroundColor: ["rgba(255, 255, 255, 1)", "rgba(0, 0, 0, 0)"],
-      textcolor: ["rgba(175, 72, 255, 1)", "rgba(255, 255, 255, 1)"],
-      transition: { duration: 3, delay: 2 },
+      opacity: [0, 0.5, 1],
+      backgroundColor: [
+        "rgba(255, 255, 255, 1)",
+        "rgba(255, 255, 255, 0.5)",
+        "rgba(0, 0, 0, 0)",
+      ],
+      textcolor: [
+        "rgba(175, 72, 255, 1)",
+        "rgba(175, 72, 255, 1)",
+        "rgba(255, 255, 255, 1)",
+      ],
+      transition: { duration: 3, delay: 3 },
     },
   };
 
@@ -253,13 +262,13 @@ const Home: NextPage = () => {
 
       <motion.div
         custom={{
-          marginTop: 40,
+          marginTop: "5vh",
           transition: { duration: 0.5, delay: 2 * 0.8 },
         }}
         animate={controls}
         // className="homepage"
         initial={{
-          marginTop: 385,
+          marginTop: "40vh",
         }}
       >
         <div>
@@ -273,14 +282,14 @@ const Home: NextPage = () => {
 
       <button onClick={handleClickBtnYou}>
         <motion.div
-          custom={{ opacity: 1, transition: { duration: 0.8, delay: 3 * 0.8 } }}
+          custom={{ opacity: 1, transition: { duration: 0.8, delay: 3 * 0.5 } }}
           animate={controls}
           initial={{
             position: "fixed",
             height: 44,
             width: 33,
             left: 19,
-            top: 321,
+            top: "30%",
             opacity: 0,
           }}
         >
@@ -355,7 +364,7 @@ const Home: NextPage = () => {
             height: 331,
             width: 273,
             left: 59,
-            top: 278,
+            top: "30%",
           }}
         >
           <div className="ml-[16px] mt-4 flex h-[43px] w-[242px] items-center justify-between bg-[#F3D1F9] px-2 text-sm text-[#7C7C7C] ">
@@ -409,15 +418,16 @@ const Home: NextPage = () => {
 
       <button onClick={handleClickBtnWe}>
         <motion.div
-          custom={{ opacity: 1, transition: { duration: 0.8, delay: 3 * 0.8 } }}
+          custom={{ opacity: 1, transition: { duration: 0.8, delay: 3 * 0.5 } }}
           animate={controls}
           initial={{
             position: "fixed",
             height: 56,
             width: 53,
-            left: 316,
-            top: 706,
+            left: "80%",
+            top: "80%",
             opacity: 0,
+            zIndex: 999,
           }}
         >
           <svg
@@ -477,9 +487,11 @@ const Home: NextPage = () => {
 
       <motion.div
         className="intro"
-        initial={{ opacity: 0, zIndex: -10 }}
+        initial={{ opacity: 0, zIndex: -10, left: "100%" }}
         animate={
-          btnWe ? { opacity: 1, zIndex: 999 } : { opacity: 0, zIndex: -10 }
+          btnWe
+            ? { opacity: 1, zIndex: 888, left: "10%" }
+            : { opacity: 0, zIndex: -10, left: "100%" }
         }
         transition={{ duration: 0.5 }}
       >
@@ -504,7 +516,7 @@ const Home: NextPage = () => {
 
       <motion.ul
         layout
-        custom={{ top: 0, transition: { duration: 2, delay: 3 * 1 } }}
+        custom={{ top: 0, transition: { duration: 2, delay: 3 * 0.8 } }}
         animate={controls}
         className="posts"
         initial={{
@@ -515,7 +527,7 @@ const Home: NextPage = () => {
           height: "100%",
         }}
       >
-        {posts.map((post, index) => (
+        {posts.map((post) => (
           <motion.li
             layout
             variants={postVariants}
@@ -541,7 +553,7 @@ const Home: NextPage = () => {
 
       {showBar && (
         <motion.div
-          animate={{ opacity: [1, 0], transition: { duration: 1 } }}
+          animate={{ opacity: [1, 0], transition: { duration: 1.5 } }}
           initial={{
             width: "60%",
             height: "10px",
