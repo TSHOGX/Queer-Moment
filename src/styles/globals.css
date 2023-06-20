@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: scaleUp 1s ease-in-out forwards;
+  /* animation: scaleUp 1s ease-in-out forwards; */
 }
 
 /* header */
