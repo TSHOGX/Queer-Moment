@@ -349,7 +349,7 @@ const Home: NextPage = () => {
         animate={controls}
         className="homepage"
         initial={{
-          marginTop: "40vh",
+          marginTop: "50vh",
         }}
       >
         <div className="container1">
