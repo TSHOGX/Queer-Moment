@@ -77,20 +77,20 @@ const Home: NextPage = () => {
     return () => window.removeEventListener("click", handleClick);
   }, [showPost]);
 
-  const showFormDivRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!btnYou) return;
-    function handleClick(event: { target: any }) {
-      if (
-        showFormDivRef.current &&
-        !showFormDivRef.current.contains(event.target)
-      ) {
-        setBtnYou(false);
-      }
-    }
-    window.addEventListener("click", handleClick);
-    return () => window.removeEventListener("click", handleClick);
-  }, [btnYou]);
+  // const showFormDivRef = useRef<HTMLDivElement>(null);
+  // useEffect(() => {
+  //   if (!btnYou) return;
+  //   function handleClick(event: { target: any }) {
+  //     if (
+  //       showFormDivRef.current &&
+  //       !showFormDivRef.current.contains(event.target)
+  //     ) {
+  //       setBtnYou(false);
+  //     }
+  //   }
+  //   window.addEventListener("click", handleClick);
+  //   return () => window.removeEventListener("click", handleClick);
+  // }, [btnYou]);
 
   const showAboutDivRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -362,7 +362,8 @@ const Home: NextPage = () => {
         </div>
       </motion.div>
 
-      <div ref={showFormDivRef}>
+      <div>
+        {/* <div ref={showFormDivRef}> */}
         <button onClick={handleClickBtnYou}>
           <motion.img
             src={btnYou ? "./youOpen.svg" : "./you.svg"}
