@@ -364,7 +364,24 @@ const Home: NextPage = () => {
 
       <div ref={showFormDivRef}>
         <button onClick={handleClickBtnYou}>
-          <motion.div
+          <motion.img
+            src={btnYou ? "./youOpen.svg" : "./you.svg"}
+            alt="btnYou"
+            custom={{
+              opacity: 1,
+              transition: { duration: 0.5, delay: 3 * 0.5 },
+            }}
+            animate={controls}
+            initial={{
+              position: "fixed",
+              height: 44,
+              width: 33,
+              left: 19,
+              top: 321,
+              opacity: 0,
+            }}
+          />
+          {/* <motion.div
             custom={{
               opacity: 1,
               transition: { duration: 0.8, delay: 3 * 0.5 },
@@ -387,7 +404,7 @@ const Home: NextPage = () => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <g filter="url(#filter0_d_51_1005)">
-                {/* <motion.path fill={youFill} d={youPath} /> */}
+                <motion.path fill={youFill} d={youPath} />
                 <path
                   d={btnYou ? youOpen : you}
                   fill={btnYou ? youColors[1] : youColors[0]}
@@ -435,27 +452,29 @@ const Home: NextPage = () => {
                 </filter>
               </defs>
             </svg>
-          </motion.div>
+          </motion.div> */}
         </button>
 
         <motion.div
+          className="form"
+          style={{
+            backgroundImage: "url(./formBg.svg)",
+            backgroundRepeat: "no-repeat",
+            // backgroundColor: "rgba(255, 255, 255, 0.8)",
+            backgroundSize: "cover",
+            // backdropFilter: "blue(5px)",
+            position: "fixed",
+            height: 331,
+            width: 273,
+            left: 59,
+            top: "30%",
+            zIndex: btnYou ? 100 : -10,
+          }}
           initial={{ opacity: 0 }}
           animate={btnYou ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div
-            style={{
-              backgroundImage: "url(./formBg.svg)",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              position: "fixed",
-              height: 331,
-              width: 273,
-              left: 59,
-              top: "30%",
-              zIndex: 100,
-            }}
-          >
+          <div>
             <div className="ml-[16px] mt-4 flex h-[43px] w-[242px] items-center justify-between bg-[#F3D1F9] px-2 text-sm text-[#7C7C7C] ">
               <div>添加至</div>
               <ThemeProvider theme={theme}>
@@ -508,7 +527,24 @@ const Home: NextPage = () => {
 
       <div ref={showAboutDivRef} className={btnWe ? "z-20" : " "}>
         <button onClick={handleClickBtnWe}>
-          <motion.div
+          <motion.img
+            src={btnWe ? "./weOpen.svg" : "./we.svg"}
+            alt="btnWe"
+            custom={{
+              opacity: 1,
+              transition: { duration: 0.5, delay: 3 * 0.5 },
+            }}
+            animate={controls}
+            initial={{
+              position: "fixed",
+              height: 56,
+              width: 53,
+              left: 316,
+              top: 706,
+              opacity: 0,
+            }}
+          />
+          {/* <motion.div
             custom={{
               opacity: 1,
               transition: { duration: 0.8, delay: 3 * 0.5 },
@@ -532,7 +568,7 @@ const Home: NextPage = () => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <g filter="url(#filter0_d_51_1002)">
-                {/* <motion.path fill={weFill} d={wePath} /> */}
+                <motion.path fill={weFill} d={wePath} />
                 <path
                   d={btnWe ? weOpen : we}
                   fill={btnWe ? weColors[1] : weColors[0]}
@@ -580,7 +616,7 @@ const Home: NextPage = () => {
                 </filter>
               </defs>
             </svg>
-          </motion.div>
+          </motion.div> */}
         </button>
 
         <motion.div

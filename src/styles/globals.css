@@ -142,15 +142,3 @@ main {
 .posts::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
-
-/* showPost */
-/* .showpostcontent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 12px;
-  color: black;
-  font-family: "Source Sans Pro", sans-serif;
-  z-index: 999;
-} */
