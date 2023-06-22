@@ -69,13 +69,12 @@ const Home: NextPage = () => {
 
     // Get all the li elements
     const liElements = document.querySelectorAll("li");
-    console.log("liElements", liElements);
+    // console.log("liElements", liElements);
 
     liElements.forEach((li) => {
       // Add a click event listener to each li element
       li.addEventListener("click", () => {
         console.log("enter event listener");
-        console.log("whiteTracker", whiteTracker);
         if (whiteTracker === 1) {
           liElements.forEach((li) => {
             li.style.backgroundColor = "";
@@ -249,6 +248,7 @@ const Home: NextPage = () => {
   };
 
   const fetchOne = async (e: MouseEvent, id: number) => {
+    // console.log(id);
     if (id === -999) {
       return;
     }
@@ -286,21 +286,7 @@ const Home: NextPage = () => {
         const data: Datas = await response.json();
         // console.log("Fetched", data.allMsg);
         data.allMsg.sort((a: Post, b: Post) => {
-          const dateA = new Date(a.date);
-          const dateB = new Date(b.date);
-          const yearDiff = dateA.getFullYear() - dateB.getFullYear();
-          if (yearDiff !== 0) {
-            return yearDiff;
-          }
-          const monthDiff = dateA.getMonth() - dateB.getMonth();
-          if (monthDiff !== 0) {
-            return monthDiff;
-          }
-          const dayDiff = dateA.getDate() - dateB.getDate();
-          if (dayDiff !== 0) {
-            return dayDiff;
-          }
-          return dateB.getTime() - dateA.getTime();
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
         });
         setPosts(data.allMsg);
       }
@@ -342,6 +328,15 @@ const Home: NextPage = () => {
       oldLi.style.color = "white";
       oldLi.style.backgroundColor = "";
     }
+
+    setTimeout(() => {
+      if (currentLi) {
+        currentLi.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 50);
   };
 
   const handleClickBtnL = (e: MouseEvent) => {
@@ -370,12 +365,21 @@ const Home: NextPage = () => {
       oldLi.style.backgroundColor = "";
       oldLi.style.color = "white";
     }
+
+    setTimeout(() => {
+      if (currentLi) {
+        currentLi.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 50);
   };
 
   // scroll animation
   useEffect(() => {
     fetchAll();
-    console.log("scroll animation", scrollToRef.current?.value);
+    // console.log("scroll animation", scrollToRef.current?.value);
     setTimeout(() => {
       if (scrollToRef.current) {
         scrollToRef.current.scrollIntoView({
@@ -397,22 +401,22 @@ const Home: NextPage = () => {
   const postVariants = {
     pre: {
       opacity: 1,
-      backgroundColor: "rgba(0, 0, 0, 0)",
-      textcolor: "rgba(255, 255, 255, 1)",
+      // backgroundColor: "rgba(0, 0, 0, 0)",
+      // textcolor: "rgba(255, 255, 255, 1)",
     },
     visible: {
-      opacity: [0, 0.5, 1],
-      backgroundColor: [
-        "rgba(255, 255, 255, 1)",
-        "rgba(255, 255, 255, 0.5)",
-        "rgba(0, 0, 0, 0)",
-      ],
-      textcolor: [
-        "rgba(175, 72, 255, 1)",
-        "rgba(175, 72, 255, 1)",
-        "rgba(255, 255, 255, 1)",
-      ],
-      transition: { duration: 2, delay: 1 },
+      opacity: [0, 1],
+      // backgroundColor: [
+      //   "rgba(255, 255, 255, 1)",
+      //   "rgba(255, 255, 255, 0.5)",
+      //   "rgba(0, 0, 0, 0)",
+      // ],
+      // textcolor: [
+      //   "rgba(175, 72, 255, 1)",
+      //   "rgba(175, 72, 255, 1)",
+      //   "rgba(255, 255, 255, 1)",
+      // ],
+      transition: { duration: 1, delay: 1 },
     },
   };
 
@@ -759,7 +763,7 @@ const Home: NextPage = () => {
               !showPost ? (e) => fetchOne(e, post.id) : (e) => fetchOne(e, -999)
             }
             ref={scrollToRef}
-            animate={post.id - 1 === scrollToRef.current?.value && "visible"}
+            animate={"visible"}
           >
             {`${new Date(post.date).getFullYear()} {${(
               new Date(post.date).getMonth() + 1
@@ -851,5 +855,3 @@ const theme = createTheme({
     },
   },
 });
-
-// //FIXME;

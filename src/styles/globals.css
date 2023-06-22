@@ -134,6 +134,7 @@ main {
   font-family: "Source Sans Pro", sans-serif;
   position: absolute;
   bottom: -700px;
+  padding-bottom: 60vh;
   overflow: scroll;
   height: 100%;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -141,4 +142,8 @@ main {
 }
 .posts::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+
+.posts li {
+  scroll-margin-top: 30vh;
 }
