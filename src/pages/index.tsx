@@ -633,8 +633,8 @@ const Home: NextPage = () => {
               position: "fixed",
               height: 56,
               width: 53,
-              left: 316,
-              top: 706,
+              left: "82%",
+              top: "80%",
               opacity: 0,
             }}
           />
