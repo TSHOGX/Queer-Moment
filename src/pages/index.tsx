@@ -61,6 +61,56 @@ const Home: NextPage = () => {
   const [newPostId, setNewPostId] = useState(-1);
   const scrollToRef = useRef<HTMLLIElement>(null);
 
+  // FIXME
+  let whiteTracker = 0;
+  useEffect(() => {
+    let isFirstClick = true;
+    let previousLi: HTMLLIElement | null = null;
+
+    // Get all the li elements
+    const liElements = document.querySelectorAll("li");
+    console.log("liElements", liElements);
+
+    liElements.forEach((li) => {
+      // Add a click event listener to each li element
+      li.addEventListener("click", () => {
+        console.log("enter event listener");
+        console.log("whiteTracker", whiteTracker);
+        if (whiteTracker === 1) {
+          liElements.forEach((li) => {
+            li.style.backgroundColor = "";
+            li.style.color = "";
+          });
+          whiteTracker = 0;
+        }
+        // Check if it's the first click
+        if (isFirstClick) {
+          // Change the background color to purple
+          li.style.backgroundColor = "white";
+          // Change the font color to white
+          li.style.color = "#BD68FE";
+          // Set isFirstClick to false
+          isFirstClick = false;
+        } else {
+          // Reset styles of the previous li element
+          if (previousLi) {
+            console.log("change back");
+            previousLi.style.backgroundColor = "";
+            previousLi.style.color = "";
+          }
+
+          // Change the background color to white
+          li.style.backgroundColor = "white";
+          // Change the font color to purple
+          li.style.color = "#BD68FE";
+        }
+        // Set the current li element as the previousLi
+        previousLi = li;
+        whiteTracker = 1;
+      });
+    });
+  }, [posts]);
+
   // close & show animation
   const showPostDivRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -77,20 +127,20 @@ const Home: NextPage = () => {
     return () => window.removeEventListener("click", handleClick);
   }, [showPost]);
 
-  const showFormDivRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!btnYou) return;
-    function handleClick(event: { target: any }) {
-      if (
-        showFormDivRef.current &&
-        !showFormDivRef.current.contains(event.target)
-      ) {
-        setBtnYou(false);
-      }
-    }
-    window.addEventListener("click", handleClick);
-    return () => window.removeEventListener("click", handleClick);
-  }, [btnYou]);
+  // const showFormDivRef = useRef<HTMLDivElement>(null);
+  // useEffect(() => {
+  //   if (!btnYou) return;
+  //   function handleClick(event: { target: any }) {
+  //     if (
+  //       showFormDivRef.current &&
+  //       !showFormDivRef.current.contains(event.target)
+  //     ) {
+  //       setBtnYou(false);
+  //     }
+  //   }
+  //   window.addEventListener("click", handleClick);
+  //   return () => window.removeEventListener("click", handleClick);
+  // }, [btnYou]);
 
   const showAboutDivRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -204,45 +254,6 @@ const Home: NextPage = () => {
           setNewPostContent(data.oneMsg.content || "null");
           setNewPostId(data.oneMsg.id || -1);
           setShowPost(true);
-          //FIXME
-
-          let isFirstClick = true;
-          let previousLi: HTMLLIElement | null = null;
-
-          // Get all the li elements
-          const liElements = document.querySelectorAll("li");
-
-          liElements.forEach((li) => {
-            // Add a click event listener to each li element
-            li.addEventListener("click", () => {
-              console.log("enter event listener");
-
-              // Check if it's the first click
-              if (isFirstClick) {
-                // Change the background color to purple
-                li.style.backgroundColor = "white";
-                // Change the font color to white
-                li.style.color = "#BD68FE";
-                // Set isFirstClick to false
-                isFirstClick = false;
-              } else {
-                // Reset styles of the previous li element
-                if (previousLi) {
-                  console.log("change back");
-                  previousLi.style.backgroundColor = "";
-                  previousLi.style.color = "";
-                }
-
-                // Change the background color to white
-                li.style.backgroundColor = "white";
-                // Change the font color to purple
-                li.style.color = "#BD68FE";
-              }
-
-              // Set the current li element as the previousLi
-              previousLi = li;
-            });
-          });
         }
       } catch (error) {
         console.log("There was an error fetching:", error);
@@ -310,10 +321,14 @@ const Home: NextPage = () => {
 
     let currentLi = liElements[currentIndex + 1];
     let oldLi = liElements[currentIndex];
-    currentLi.style.backgroundColor = "white";
-    currentLi.style.color = "#BD68FE";
-    oldLi.style.color = "white";
-    oldLi.style.backgroundColor = "";
+    if (currentLi) {
+      currentLi.style.backgroundColor = "white";
+      currentLi.style.color = "#BD68FE";
+    }
+    if (oldLi) {
+      oldLi.style.color = "white";
+      oldLi.style.backgroundColor = "";
+    }
   };
 
   const handleClickBtnL = (e: MouseEvent) => {
@@ -334,11 +349,14 @@ const Home: NextPage = () => {
     fetchOne(e, posts[nextIndex]?.id || -1);
     let currentLi = liElements[currentIndex - 1];
     let oldLi = liElements[currentIndex];
-
-    currentLi.style.backgroundColor = "white";
-    currentLi.style.color = "#BD68FE";
-    oldLi.style.color = "white";
-    oldLi.style.backgroundColor = "";
+    if (currentLi) {
+      currentLi.style.backgroundColor = "white";
+      currentLi.style.color = "#BD68FE";
+    }
+    if (oldLi) {
+      oldLi.style.backgroundColor = "";
+      oldLi.style.color = "white";
+    }
   };
 
   // scroll animation
@@ -420,7 +438,8 @@ const Home: NextPage = () => {
         </div>
       </motion.div>
 
-      <div ref={showFormDivRef}>
+      <div>
+        {/* <div ref={showFormDivRef}> */}
         <button onClick={handleClickBtnYou}>
           <motion.img
             src={btnYou ? "./youOpen.svg" : "./you.svg"}
