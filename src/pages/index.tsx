@@ -379,15 +379,15 @@ const Home: NextPage = () => {
   // scroll animation
   useEffect(() => {
     fetchAll();
-    // console.log("scroll animation", scrollToRef.current?.value);
     setTimeout(() => {
+      console.log("scroll animation", scrollToRef.current?.value);
       if (scrollToRef.current) {
         scrollToRef.current.scrollIntoView({
           behavior: "smooth",
-          block: "center",
+          block: "start",
         });
       }
-    }, 100);
+    }, 300);
   }, [newPost]);
 
   // automatically play animation
