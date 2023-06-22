@@ -38,7 +38,7 @@ main {
   width: 90%;
 }
 
-.container1 {
+.container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -46,7 +46,7 @@ main {
   /* margin-top: 20px; */
 }
 
-.container1 h1 {
+.container h1 {
   /* margin: 0; */
   color: white;
   font-family: "Poppins", sans-serif;
@@ -55,14 +55,6 @@ main {
   /* line-height: 7px; */
   letter-spacing: 0.01em;
   text-shadow: 0 4px 3px rgba(186, 49, 208, 0.2);
-}
-
-.container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  /* margin-top: 20px; */
 }
 
 .container p {
@@ -147,4 +139,13 @@ main {
 
 .posts li {
   scroll-margin-top: 30vh;
+}
+
+.form-div {
+  position: fixed;
+  height: 331px;
+  width: 273px;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
 }

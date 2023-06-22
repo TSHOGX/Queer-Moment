@@ -446,7 +446,7 @@ const Home: NextPage = () => {
           marginTop: "50vh",
         }}
       >
-        <div className="container1">
+        <div className="container">
           <h1>QUEER</h1>
           <h1>MOMENT</h1>
         </div>
@@ -471,8 +471,8 @@ const Home: NextPage = () => {
               position: "fixed",
               height: 44,
               width: 33,
-              left: 19,
-              top: 321,
+              right: "85%",
+              top: "30%",
               opacity: 0,
             }}
           />
@@ -551,18 +551,13 @@ const Home: NextPage = () => {
         </button>
 
         <motion.div
-          className="form"
+          className="form-div"
           style={{
             backgroundImage: "url(./formBg.svg)",
             backgroundRepeat: "no-repeat",
             // backgroundColor: "rgba(255, 255, 255, 0.8)",
             backgroundSize: "cover",
             // backdropFilter: "blue(5px)",
-            position: "fixed",
-            height: 331,
-            width: 273,
-            left: 59,
-            top: "30%",
             zIndex: btnYou ? 100 : -10,
           }}
           initial={{ opacity: 0 }}
