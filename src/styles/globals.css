@@ -135,6 +135,7 @@ main {
   position: absolute;
   bottom: -700px;
   padding-bottom: 60vh;
+  padding-top: 12vh;
   overflow: scroll;
   height: 100%;
   -ms-overflow-style: none; /* Internet Explorer 10+ */

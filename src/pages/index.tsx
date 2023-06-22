@@ -425,7 +425,7 @@ const Home: NextPage = () => {
       <motion.img
         src="./background.png"
         alt="background"
-        custom={{ scale: 2.3, transition: { duration: 0.5, delay: 1 * 0.8 } }}
+        custom={{ scale: 2.3, transition: { duration: 0.8, delay: 1 * 0.8 } }}
         animate={controls}
         className="background-container"
         initial={{
@@ -437,7 +437,7 @@ const Home: NextPage = () => {
       <motion.div
         custom={{
           marginTop: "3vh",
-          transition: { duration: 0.5, delay: 2 * 0.8 },
+          transition: { duration: 0.8, delay: 2 * 0.8 },
         }}
         animate={controls}
         className="homepage"
@@ -463,7 +463,7 @@ const Home: NextPage = () => {
             alt="btnYou"
             custom={{
               opacity: 1,
-              transition: { duration: 0.5, delay: 3 * 0.5 },
+              transition: { duration: 0.8, delay: 3 * 0.8 + 2 },
             }}
             animate={controls}
             initial={{
@@ -626,7 +626,7 @@ const Home: NextPage = () => {
             alt="btnWe"
             custom={{
               opacity: 1,
-              transition: { duration: 0.5, delay: 3 * 0.5 },
+              transition: { duration: 0.8, delay: 3 * 0.8 + 2 },
             }}
             animate={controls}
             initial={{
