@@ -113,8 +113,18 @@ const Home: NextPage = () => {
 
   // close & show animation
   const showPostDivRef = useRef<HTMLDivElement>(null);
+  const resetStyle = async () => {
+    const liElements = document.querySelectorAll("li");
+    liElements.forEach((li) => {
+      li.style.backgroundColor = "";
+      li.style.color = "";
+    });
+  };
   useEffect(() => {
-    if (!showPost) return;
+    if (!showPost) {
+      resetStyle();
+      return;
+    }
     function handleClick(event: { target: any }) {
       if (
         showPostDivRef.current &&
@@ -239,6 +249,9 @@ const Home: NextPage = () => {
   };
 
   const fetchOne = async (e: MouseEvent, id: number) => {
+    if (id === -999) {
+      return;
+    }
     if (!btnWe && !btnYou) {
       try {
         const response = await fetch("/api/inquiry", {
@@ -340,7 +353,7 @@ const Home: NextPage = () => {
       currentPostId = currentPost.id;
     }
     const currentIndex = posts.findIndex((post) => post.id === currentPostId);
-    console.log(currentIndex);
+    // console.log(currentIndex);
 
     var nextIndex = currentIndex - 1;
     if (nextIndex === -1) {
@@ -742,7 +755,9 @@ const Home: NextPage = () => {
             variants={postVariants}
             key={post.id}
             value={post.id}
-            onClick={(e) => fetchOne(e, post.id)}
+            onClick={
+              !showPost ? (e) => fetchOne(e, post.id) : (e) => fetchOne(e, -999)
+            }
             ref={scrollToRef}
             animate={post.id - 1 === scrollToRef.current?.value && "visible"}
           >
