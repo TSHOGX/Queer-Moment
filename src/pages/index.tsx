@@ -241,6 +241,16 @@ const Home: NextPage = () => {
         setTimeout(() => {
           setShowBar(false);
         }, 2000);
+        fetchAll();
+        setTimeout(() => {
+          console.log("scroll animation", scrollToRef.current?.value);
+          if (scrollToRef.current) {
+            scrollToRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }, 1000);
       }
     } catch (error) {
       console.log("there was an error submitting", error);
@@ -376,19 +386,10 @@ const Home: NextPage = () => {
     }, 50);
   };
 
-  // scroll animation
+  // first fetch
   useEffect(() => {
     fetchAll();
-    setTimeout(() => {
-      console.log("scroll animation", scrollToRef.current?.value);
-      if (scrollToRef.current) {
-        scrollToRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }, 300);
-  }, [newPost]);
+  }, []);
 
   // automatically play animation
   const controls = useAnimationControls();
