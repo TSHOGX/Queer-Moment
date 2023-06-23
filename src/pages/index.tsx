@@ -61,53 +61,68 @@ const Home: NextPage = () => {
   const [newPostId, setNewPostId] = useState(-1);
   const scrollToRef = useRef<HTMLLIElement>(null);
 
-  // FIXME
+  // white bar
   let whiteTracker = 0;
   useEffect(() => {
     let isFirstClick = true;
     let previousLi: HTMLLIElement | null = null;
 
-    // Get all the li elements
     const liElements = document.querySelectorAll("li");
     // console.log("liElements", liElements);
 
-    liElements.forEach((li) => {
+    const handleClick = (li: HTMLLIElement) => {
       // Add a click event listener to each li element
-      li.addEventListener("click", () => {
-        console.log("enter event listener");
-        if (whiteTracker === 1) {
-          liElements.forEach((li) => {
-            li.style.backgroundColor = "";
-            li.style.color = "";
-          });
-          whiteTracker = 0;
-        }
-        // Check if it's the first click
-        if (isFirstClick) {
-          // Change the background color to purple
-          li.style.backgroundColor = "white";
-          // Change the font color to white
-          li.style.color = "#BD68FE";
-          // Set isFirstClick to false
-          isFirstClick = false;
-        } else {
-          // Reset styles of the previous li element
-          if (previousLi) {
-            console.log("change back");
-            previousLi.style.backgroundColor = "";
-            previousLi.style.color = "";
+      if (!btnWe && !btnYou) {
+        // console.log("in", btnWe, btnYou);
+        li.addEventListener("click", () => {
+          console.log("enter event listener");
+          if (whiteTracker === 1) {
+            liElements.forEach((li) => {
+              li.style.backgroundColor = "";
+              li.style.color = "";
+            });
+            whiteTracker = 0;
           }
+          // Check if it's the first click
+          if (isFirstClick) {
+            // Change the background color to purple
+            li.style.backgroundColor = "white";
+            // Change the font color to white
+            li.style.color = "#BD68FE";
+            // Set isFirstClick to false
+            isFirstClick = false;
+          } else {
+            // Reset styles of the previous li element
+            if (previousLi) {
+              console.log("change back");
+              previousLi.style.backgroundColor = "";
+              previousLi.style.color = "";
+            }
 
-          // Change the background color to white
-          li.style.backgroundColor = "white";
-          // Change the font color to purple
-          li.style.color = "#BD68FE";
-        }
-        // Set the current li element as the previousLi
-        previousLi = li;
-        whiteTracker = 1;
+            // Change the background color to white
+            li.style.backgroundColor = "white";
+            // Change the font color to purple
+            li.style.color = "#BD68FE";
+          }
+          // Set the current li element as the previousLi
+          previousLi = li;
+          whiteTracker = 1;
+        });
+      }
+    };
+
+    // console.log("out", btnWe, btnYou);
+    if (!btnWe && !btnYou) {
+      liElements.forEach((li) => {
+        li.addEventListener("click", handleClick.bind(null, li));
       });
-    });
+    }
+
+    return () => {
+      liElements.forEach((li) => {
+        li.removeEventListener("click", handleClick.bind(null, li));
+      });
+    };
   }, [posts]);
 
   // close & show animation
