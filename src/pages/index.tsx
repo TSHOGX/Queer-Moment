@@ -791,7 +791,7 @@ const Home: NextPage = () => {
       {/* show post */}
       {showPost && !btnWe && !btnYou && (
         <motion.div
-          animate={{ opacity: 1, transition: { duration: 0.3 } }}
+          animate={{ opacity: 1 }}
           initial={{
             position: "fixed",
             top: "40%",
