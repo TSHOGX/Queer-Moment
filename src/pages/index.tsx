@@ -40,6 +40,7 @@ const Home: NextPage = () => {
   const [showPost, setShowPost] = useState(false);
   const [newPostContent, setNewPostContent] = useState("");
   const [newPostId, setNewPostId] = useState(-1);
+  const [fetchCount, setFetchCount] = useState(-1);
   const scrollToRef = useRef<HTMLLIElement>(null);
 
   // white bar
@@ -178,20 +179,11 @@ const Home: NextPage = () => {
         setName("");
         setBtnYou(false);
         setShowBar(true);
-        console.log("form submitted successfully !!!");
         setTimeout(() => {
           setShowBar(false);
         }, 2000);
         fetchAll();
-        setTimeout(() => {
-          console.log("scroll animation", scrollToRef.current?.value);
-          if (scrollToRef.current) {
-            scrollToRef.current.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        }, 1000);
+        console.log("form submitted successfully !!!");
       }
     } catch (error) {
       console.log("there was an error submitting", error);
@@ -240,6 +232,7 @@ const Home: NextPage = () => {
           return new Date(a.date).getTime() - new Date(b.date).getTime();
         });
         setPosts(data.allMsg);
+        setFetchCount(fetchCount + 1);
       }
     } catch (error) {
       console.log("There was an error fetching:", error);
@@ -331,6 +324,19 @@ const Home: NextPage = () => {
   useEffect(() => {
     fetchAll();
   }, []);
+
+  // other fetches - scroll to new post position
+  useEffect(() => {
+    if (fetchCount) {
+      console.log("scroll animation", scrollToRef.current?.value);
+      if (scrollToRef.current) {
+        scrollToRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }
+  }, [posts]);
 
   // automatically play animation
   const controls = useAnimationControls();
@@ -543,7 +549,7 @@ const Home: NextPage = () => {
             ref={scrollToRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: [0, 1] }}
-            transition={{ delay: 2 }}
+            transition={{ delay: 1 }}
           >
             {`${new Date(post.date).getFullYear()} {${(
               new Date(post.date).getMonth() + 1
