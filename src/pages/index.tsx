@@ -789,39 +789,37 @@ const Home: NextPage = () => {
       )}
 
       {/* show post */}
-      {showPost && !btnWe && !btnYou && (
-        <motion.div
-          animate={{ opacity: 1 }}
-          initial={{
-            position: "fixed",
-            top: "40%",
-            zIndex: 888,
-            opacity: 0,
-          }}
-          ref={showPostDivRef}
-        >
-          <div className=" absolute flex h-full w-full flex-row">
-            <button
-              onClick={handleClickBtnL}
-              className="h-full w-1/5 flex-auto"
-              id="showpost-left"
-            >
-              <img className=" mx-auto" src="./showPostL.svg" alt="showPostL" />
-            </button>
-            <div className=" w-4/5 flex-auto ">
-              <div className=" h-auto py-24 text-center">{newPostContent}</div>
-            </div>
-            <button
-              className="h-full w-1/5 flex-auto "
-              id="showpost-right"
-              onClick={handleClickBtnR}
-            >
-              <img className=" mx-auto" src="./showPostR.svg" alt="showPostR" />
-            </button>
+      <motion.div
+        initial={{ opacity: 0, zIndex: -10, top: "40%", position: "fixed" }}
+        animate={
+          showPost && !btnWe && !btnYou
+            ? { opacity: 1, zIndex: 888 }
+            : { opacity: 0, zIndex: -10 }
+        }
+        // transition={{ duration: 0.5 }}
+        ref={showPostDivRef}
+      >
+        <div className=" absolute flex h-full w-full flex-row">
+          <button
+            onClick={handleClickBtnL}
+            className="h-full w-1/5 flex-auto"
+            id="showpost-left"
+          >
+            <img className=" mx-auto" src="./showPostL.svg" alt="showPostL" />
+          </button>
+          <div className=" w-4/5 flex-auto ">
+            <div className=" h-auto py-24 text-center">{newPostContent}</div>
           </div>
-          <img className=" static" src="./showPostBg.svg" alt="showPostBg" />
-        </motion.div>
-      )}
+          <button
+            className="h-full w-1/5 flex-auto "
+            id="showpost-right"
+            onClick={handleClickBtnR}
+          >
+            <img className=" mx-auto" src="./showPostR.svg" alt="showPostR" />
+          </button>
+        </div>
+        <img className=" static" src="./showPostBg.svg" alt="showPostBg" />
+      </motion.div>
     </main>
   );
 };
