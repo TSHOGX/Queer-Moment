@@ -20,6 +20,13 @@
   animation: scaleUp 1s ease-in-out forwards;
 }
 
+.background-cover {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
 /* header */
 main {
   display: flex;
@@ -34,6 +41,7 @@ main {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+  z-index: 20;
 }
 
 .container {
@@ -179,4 +187,3 @@ main {
     font-size: 1.4vw;
   }
 }
-

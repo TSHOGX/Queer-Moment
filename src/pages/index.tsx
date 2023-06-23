@@ -449,6 +449,17 @@ const Home: NextPage = () => {
         }}
       />
 
+      <motion.img
+        src="./backgroundCover.svg"
+        alt="backgroundCover"
+        custom={{ opacity: 1, transition: { delay: 2 * 0.8 } }}
+        animate={controls}
+        className="background-cover"
+        initial={{
+          opacity: 0,
+        }}
+      />
+
       {/* header */}
       <motion.div
         custom={{
