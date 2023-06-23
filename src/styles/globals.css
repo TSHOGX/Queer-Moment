@@ -121,7 +121,7 @@ main {
 /* calendar */
 .posts {
   /* display: none; */
-  font-size: 11px;
+  font-size: 3vw;
   color: white;
   font-family: "Source Sans Pro", sans-serif;
   position: absolute;
@@ -149,3 +149,25 @@ main {
   right: 50%;
   transform: translate(50%, -50%);
 }
+
+@media screen and (min-width: 600px) {
+  .intro-logo img {
+    width: 20vw;
+    margin-top: -40%;
+  }
+  .intro-content p {
+    margin-left: 10%;
+    /* margin-top: 6%; */
+    font-size: 1.3vw;
+    line-height: 1.5;
+  }
+  .intro-contact {
+    margin-top: 0;
+    font-size: 1.2vw;
+    line-height: 1.5;
+  }
+  .posts {
+    font-size: 1.7vw;
+  }
+}
+
