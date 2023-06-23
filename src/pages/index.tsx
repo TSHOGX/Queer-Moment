@@ -229,7 +229,7 @@ const Home: NextPage = () => {
         const data: Datas = await response.json();
         // console.log("Fetched", data.allMsg);
         data.allMsg.sort((a: Post, b: Post) => {
-          return new Date(a.date).getTime() - new Date(b.date).getTime();
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
         });
         setPosts(data.allMsg);
         setFetchCount(fetchCount + 1);
