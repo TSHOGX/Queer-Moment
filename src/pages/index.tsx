@@ -558,7 +558,7 @@ const Home: NextPage = () => {
             // backgroundColor: "rgba(255, 255, 255, 0.8)",
             backgroundSize: "cover",
             // backdropFilter: "blue(5px)",
-            zIndex: btnYou ? 100 : -10,
+            zIndex: btnYou ? 100 : -9999,
           }}
           initial={{ opacity: 0 }}
           animate={btnYou ? { opacity: 1 } : { opacity: 0 }}
@@ -711,11 +711,11 @@ const Home: NextPage = () => {
 
         <motion.div
           className="intro"
-          initial={{ opacity: 0, zIndex: -10, left: "100%" }}
+          initial={{ opacity: 0, zIndex: -9999, left: "100%" }}
           animate={
             btnWe
               ? { opacity: 1, zIndex: 888, left: "10%" }
-              : { opacity: 0, zIndex: -10, left: "100%" }
+              : { opacity: 0, zIndex: -9999, left: "100%" }
           }
           transition={{ duration: 0.5 }}
         >
@@ -790,11 +790,11 @@ const Home: NextPage = () => {
 
       {/* show post */}
       <motion.div
-        initial={{ opacity: 0, zIndex: -10, top: "40%", position: "fixed" }}
+        initial={{ opacity: 0, zIndex: -9999, top: "40%", position: "fixed" }}
         animate={
           showPost && !btnWe && !btnYou
             ? { opacity: 1, zIndex: 888 }
-            : { opacity: 0, zIndex: -10 }
+            : { opacity: 0, zIndex: -9999 }
         }
         // transition={{ duration: 0.5 }}
         ref={showPostDivRef}
