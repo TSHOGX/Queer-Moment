@@ -138,6 +138,7 @@ main {
   padding-top: 15vh;
   overflow: scroll;
   height: 100%;
+  max-width: 30vw;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
 }
@@ -147,6 +148,7 @@ main {
 
 .posts li {
   scroll-margin-top: 30vh;
+  white-space: nowrap;
 }
 
 .form-div {

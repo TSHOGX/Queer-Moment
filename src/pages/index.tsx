@@ -446,11 +446,11 @@ const Home: NextPage = () => {
               onSubmit={handleSubmit}
               className=" ml-[16px] mt-1 flex h-60 w-[242px] flex-col gap-2"
             >
-              <input
+              <textarea
                 id="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="grow bg-transparent text-center text-sm"
+                className="grow bg-transparent py-20 text-center text-sm"
                 placeholder="写点什么"
               />
 
@@ -597,8 +597,13 @@ const Home: NextPage = () => {
           >
             <img className=" mx-auto" src="./showPostL.svg" alt="showPostL" />
           </button>
-          <div className=" w-4/5 flex-auto ">
-            <div className=" h-auto py-24 text-center">{newPostContent}</div>
+          <div className="my-auto flex h-3/5 w-4/5 justify-center overflow-scroll">
+            <textarea
+              disabled
+              name="showpost-textarea"
+              className=" flex-auto break-words bg-transparent text-center "
+              value={newPostContent}
+            />
           </div>
           <button
             className="h-full w-1/5 flex-auto "
