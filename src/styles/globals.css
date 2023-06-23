@@ -134,8 +134,8 @@ main {
   font-family: "Source Sans Pro", sans-serif;
   position: absolute;
   bottom: -700px;
-  padding-bottom: 60vh;
-  padding-top: 12vh;
+  padding-bottom: 85vh;
+  padding-top: 15vh;
   overflow: scroll;
   height: 100%;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
