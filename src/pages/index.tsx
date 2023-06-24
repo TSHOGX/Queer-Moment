@@ -444,13 +444,13 @@ const Home: NextPage = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className=" ml-[16px] mt-1 flex h-60 w-[242px] flex-col gap-2"
+              className="form-outside ml-[16px] mt-1 flex h-60 w-[242px] flex-col gap-2"
             >
               <textarea
                 id="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="grow bg-transparent py-20 text-center text-sm"
+                className="form-textarea grow bg-transparent py-20 text-center text-sm"
                 placeholder="写点什么"
               />
 
@@ -458,7 +458,7 @@ const Home: NextPage = () => {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="h-5 bg-[#F3D1F9] text-center text-sm"
+                className="form-input h-5 bg-[#F3D1F9] text-center text-sm"
                 placeholder="你的名字"
               />
 
@@ -603,7 +603,7 @@ const Home: NextPage = () => {
           </button>
           <div className="showpost-textarea my-auto flex h-3/5 w-4/5 justify-center overflow-scroll">
             <textarea
-              disabled
+              readOnly
               name="showpost-textarea"
               style={{ resize: "none" }}
               className="flex-auto break-words bg-transparent text-center "

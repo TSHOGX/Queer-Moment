@@ -169,6 +169,36 @@ main {
   transform: translate(50%, -50%);
 }
 
+.form-outside {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.form-textarea::-webkit-scrollbar {
+  display: none;
+}
+.form-textarea {
+  color: black;
+  border: none;
+  background-color: transparent;
+}
+.form-textarea:focus {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  color: black;
+  outline: none;
+  background-color: transparent;
+}
+.form-input {
+  color: black;
+  border: none;
+}
+.form-input:focus {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  color: black;
+  outline: none;
+}
+
 .showpost-textarea {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -178,9 +208,19 @@ main {
   display: none;
 }
 
-.showpost-textarea textarea {
+.showpost-textarea textarea[readonly] {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  color: black;
+  border: none;
+  background-color: transparent;
+}
+.showpost-textarea textarea:focus {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  color: black;
+  outline: none;
+  background-color: transparent;
 }
 
 .showpost-textarea textarea::-webkit-scrollbar {
