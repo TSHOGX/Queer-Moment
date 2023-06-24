@@ -91,12 +91,9 @@ main {
   box-shadow: 0px 0px 10px 5px rgba(114, 0, 204, 0.1);
 }
 
-.intro-logo img {
-  width: 100vw;
-}
-
 .intro-container {
   display: flex;
+  align-items: flex-start;
   margin: 7%;
   flex-wrap: nowrap;
 }
@@ -107,6 +104,7 @@ main {
   font-size: 12px;
   line-height: 17px;
   margin-left: 5%;
+  margin-top: 0;
 
   letter-spacing: 0.015em;
 
@@ -114,12 +112,18 @@ main {
 }
 
 .intro-logo {
-  margin-top: 5%;
+  margin-top: 0;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 0.8rem;
   display: inline-block;
 }
+.intro-logo img {
+  width: 100vw;
+}
 .intro-contact {
+  display: flex;
+  flex-direction: row;
+  gap: 8%;
   margin-top: 35%;
   margin-left: 10%;
   font-size: 0.8rem;

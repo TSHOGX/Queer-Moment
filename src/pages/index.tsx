@@ -522,10 +522,11 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className="intro-contact">
-            <div>联系方式</div>
-            <div>邮箱: </div>
-            <div>Ins: </div>
-            <div>小红书：</div>
+            <div>关注我们</div>
+            <div>
+              <div>Ins: queermoment_</div>
+              <div>小红书: Queermoment</div>
+            </div>
           </div>
         </motion.div>
       </div>
