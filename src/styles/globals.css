@@ -136,18 +136,20 @@ main {
   bottom: -700px;
   padding-bottom: 85vh;
   padding-top: 15vh;
-  overflow: scroll;
+  /* overflow: scroll; */
+  overflow-y: scroll;
+  overflow-x: hidden;
   height: 100%;
-  max-width: 30vw;
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .posts::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
 }
 
 .posts li {
   scroll-margin-top: 30vh;
+  max-width: 30vw;
   white-space: nowrap;
 }
 
