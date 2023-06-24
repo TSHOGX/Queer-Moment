@@ -165,6 +165,24 @@ main {
   transform: translate(50%, -50%);
 }
 
+.showpost-textarea {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.showpost-textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.showpost-textarea textarea {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.showpost-textarea textarea::-webkit-scrollbar {
+  display: none;
+}
+
 @media screen and (min-width: 600px) {
   .intro-logo img {
     width: 20vw;

@@ -600,11 +600,12 @@ const Home: NextPage = () => {
           >
             <img className=" mx-auto" src="./showPostL.svg" alt="showPostL" />
           </button>
-          <div className="my-auto flex h-3/5 w-4/5 justify-center overflow-scroll">
+          <div className="showpost-textarea my-auto flex h-3/5 w-4/5 justify-center overflow-scroll">
             <textarea
               disabled
               name="showpost-textarea"
-              className=" flex-auto break-words bg-transparent text-center "
+              style={{ resize: "none" }}
+              className="flex-auto break-words bg-transparent text-center "
               value={newPostContent}
             />
           </div>
