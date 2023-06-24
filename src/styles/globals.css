@@ -151,6 +151,7 @@ main {
 .posts li {
   scroll-margin-top: 30vh;
   /* max-width: 30vw; */
+  width: fit-content;
   white-space: nowrap;
 }
 

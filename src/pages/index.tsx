@@ -495,6 +495,7 @@ const Home: NextPage = () => {
               left: "82%",
               top: "80%",
               opacity: 0,
+              zIndex: 999,
             }}
           />
         </button>
@@ -505,7 +506,7 @@ const Home: NextPage = () => {
           animate={
             btnWe
               ? { opacity: 1, zIndex: 888, left: "10%" }
-              : { opacity: 0, zIndex: -9999, left: "100%" }
+              : { opacity: 0, zIndex: -888, left: "100%" }
           }
           transition={{ duration: 0.5 }}
         >
@@ -548,8 +549,10 @@ const Home: NextPage = () => {
             }
             ref={scrollToRef}
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1] }}
-            transition={{ delay: 1 }}
+            animate={{
+              opacity: [0.3, 1],
+            }}
+            transition={{ duration: 1, delay: 0.5 }}
           >
             {`${new Date(post.date).getFullYear()} {${(
               new Date(post.date).getMonth() + 1
