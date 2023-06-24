@@ -444,13 +444,13 @@ const Home: NextPage = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className=" ml-[16px] mt-1 flex h-60 w-[242px] flex-col gap-2"
+              className="form-outside ml-[16px] mt-1 flex h-60 w-[242px] flex-col gap-2"
             >
               <textarea
                 id="content"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="grow bg-transparent py-20 text-center text-sm"
+                className="form-textarea grow bg-transparent py-20 text-center text-sm"
                 placeholder="写点什么"
               />
 
@@ -458,7 +458,7 @@ const Home: NextPage = () => {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="h-5 bg-[#F3D1F9] text-center text-sm"
+                className="form-input h-5 bg-[#F3D1F9] text-center text-sm"
                 placeholder="你的名字"
               />
 
@@ -495,6 +495,7 @@ const Home: NextPage = () => {
               left: "82%",
               top: "80%",
               opacity: 0,
+              zIndex: 999,
             }}
           />
         </button>
@@ -505,7 +506,7 @@ const Home: NextPage = () => {
           animate={
             btnWe
               ? { opacity: 1, zIndex: 888, left: "10%" }
-              : { opacity: 0, zIndex: -9999, left: "100%" }
+              : { opacity: 0, zIndex: -888, left: "100%" }
           }
           transition={{ duration: 0.5 }}
         >
@@ -521,10 +522,11 @@ const Home: NextPage = () => {
             </div>
           </div>
           <div className="intro-contact">
-            <div>联系方式</div>
-            <div>邮箱: </div>
-            <div>Ins: </div>
-            <div>小红书：</div>
+            <div>关注我们</div>
+            <div>
+              <div>Ins: queermoment_</div>
+              <div>小红书: Queermoment</div>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -548,8 +550,10 @@ const Home: NextPage = () => {
             }
             ref={scrollToRef}
             initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1] }}
-            transition={{ delay: 1 }}
+            animate={{
+              opacity: [0.3, 1],
+            }}
+            transition={{ duration: 1, delay: 0.5 }}
           >
             {`${new Date(post.date).getFullYear()} {${(
               new Date(post.date).getMonth() + 1
@@ -597,11 +601,12 @@ const Home: NextPage = () => {
           >
             <img className=" mx-auto" src="./showPostL.svg" alt="showPostL" />
           </button>
-          <div className="my-auto flex h-3/5 w-4/5 justify-center overflow-scroll">
+          <div className="showpost-textarea my-auto flex h-3/5 w-4/5 justify-center overflow-scroll">
             <textarea
-              disabled
+              readOnly
               name="showpost-textarea"
-              className=" flex-auto break-words bg-transparent text-center "
+              style={{ resize: "none" }}
+              className="flex-auto break-words bg-transparent text-center "
               value={newPostContent}
             />
           </div>

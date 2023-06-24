@@ -91,12 +91,9 @@ main {
   box-shadow: 0px 0px 10px 5px rgba(114, 0, 204, 0.1);
 }
 
-.intro-logo img {
-  width: 100vw;
-}
-
 .intro-container {
   display: flex;
+  align-items: flex-start;
   margin: 7%;
   flex-wrap: nowrap;
 }
@@ -107,6 +104,7 @@ main {
   font-size: 12px;
   line-height: 17px;
   margin-left: 5%;
+  margin-top: 0;
 
   letter-spacing: 0.015em;
 
@@ -114,13 +112,19 @@ main {
 }
 
 .intro-logo {
-  margin-top: 5%;
+  margin-top: 0;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 0.8rem;
   display: inline-block;
 }
+.intro-logo img {
+  width: 100vw;
+}
 .intro-contact {
-  margin-top: 40%;
+  display: flex;
+  flex-direction: row;
+  gap: 8%;
+  margin-top: 35%;
   margin-left: 10%;
   font-size: 0.8rem;
   font-family: "Source Sans Pro", sans-serif;
@@ -128,26 +132,31 @@ main {
 
 /* calendar */
 .posts {
-  /* display: none; */
+  display: fixed;
+  left: 34vw;
+  max-width: 67vw;
   font-size: 3vw;
   color: white;
   font-family: "Source Sans Pro", sans-serif;
   position: absolute;
   bottom: -700px;
-  padding-bottom: 85vh;
-  padding-top: 15vh;
-  overflow: scroll;
-  height: 100%;
-  max-width: 30vw;
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
+  padding-bottom: 80vh;
+  padding-top: 16vh;
+  /* overflow: scroll; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100vh;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .posts::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
 }
 
 .posts li {
   scroll-margin-top: 30vh;
+  /* max-width: 30vw; */
+  width: fit-content;
   white-space: nowrap;
 }
 
@@ -158,6 +167,64 @@ main {
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+}
+
+.form-outside {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.form-textarea::-webkit-scrollbar {
+  display: none;
+}
+.form-textarea {
+  color: black;
+  border: none;
+  background-color: transparent;
+}
+.form-textarea:focus {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  color: black;
+  outline: none;
+  background-color: transparent;
+}
+.form-input {
+  color: black;
+  border: none;
+}
+.form-input:focus {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  color: black;
+  outline: none;
+}
+
+.showpost-textarea {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.showpost-textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.showpost-textarea textarea[readonly] {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  color: black;
+  border: none;
+  background-color: transparent;
+}
+.showpost-textarea textarea:focus {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  color: black;
+  outline: none;
+  background-color: transparent;
+}
+
+.showpost-textarea textarea::-webkit-scrollbar {
+  display: none;
 }
 
 @media screen and (min-width: 600px) {
