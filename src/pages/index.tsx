@@ -242,12 +242,48 @@ const Home: NextPage = () => {
   const handleClickBtnYou = () => {
     if (!btnWe && !showPost) {
       setBtnYou(!btnYou);
+      if (!btnYou) {
+        var rot = document.getElementById("btnYou");
+        var svgPath = document.getElementById("youSVG-path");
+        console.log(svgPath);
+        if (rot && svgPath) {
+          rot.style.transition = "transform 1s";
+          rot.style.transform = "rotate(90deg)";
+          svgPath.setAttribute("fill", "#8C24DE");
+        }
+      } else {
+        var rot = document.getElementById("btnYou");
+        var svgPath = document.getElementById("youSVG-path");
+        if (rot && svgPath) {
+          rot.style.transition = "transform 1s";
+          rot.style.transform = "rotate(0deg)";
+          svgPath.setAttribute("fill", "white");
+        }
+      }
     }
   };
 
   const handleClickBtnWe = () => {
     if (!btnYou && !showPost) {
       setBtnWe(!btnWe);
+      if (!btnWe) {
+        var rot = document.getElementById("btnWe");
+        var svgPath = document.getElementById("weSVG-path");
+        console.log(svgPath);
+        if (rot && svgPath) {
+          rot.style.transition = "transform 1s";
+          rot.style.transform = "rotate(-90deg)";
+          svgPath.setAttribute("fill", "#8C24DE");
+        }
+      } else {
+        var rot = document.getElementById("btnWe");
+        var svgPath = document.getElementById("weSVG-path");
+        if (rot && svgPath) {
+          rot.style.transition = "transform 1s";
+          rot.style.transform = "rotate(0)";
+          svgPath.setAttribute("fill", "white");
+        }
+      }
     }
   };
 
@@ -394,9 +430,7 @@ const Home: NextPage = () => {
       <div>
         {/* <div ref={showFormDivRef}> */}
         <button onClick={handleClickBtnYou}>
-          <motion.img
-            src={btnYou ? "./youOpen.svg" : "./you.svg"}
-            alt="btnYou"
+          <motion.div
             custom={{
               opacity: 1,
               transition: { duration: 0.8, delay: 3 * 0.8 + 2 },
@@ -404,13 +438,68 @@ const Home: NextPage = () => {
             animate={controls}
             initial={{
               position: "fixed",
-              height: 44,
-              width: 33,
               right: "85%",
               top: "30%",
               opacity: 0,
             }}
-          />
+          >
+            <div className=" flex flex-col items-center gap-1">
+              <svg
+                id="btnYou"
+                width="36"
+                height="32"
+                viewBox="0 0 36 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g filter="url(#filter0_d_51_925)">
+                  <path
+                    id="youSVG-path"
+                    d="M18 0L31.8564 24L4.14359 24L18 0Z"
+                    fill="white"
+                  />
+                </g>
+                <defs>
+                  <filter
+                    id="filter0_d_51_925"
+                    x="0.143555"
+                    y="0"
+                    width="35.7129"
+                    height="32"
+                    filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB"
+                  >
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix
+                      in="SourceAlpha"
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      result="hardAlpha"
+                    />
+                    <feOffset dy="4" />
+                    <feGaussianBlur stdDeviation="2" />
+                    <feComposite in2="hardAlpha" operator="out" />
+                    <feColorMatrix
+                      type="matrix"
+                      values="0 0 0 0 0.729412 0 0 0 0 0.192157 0 0 0 0 0.815686 0 0 0 0.25 0"
+                    />
+                    <feBlend
+                      mode="normal"
+                      in2="BackgroundImageFix"
+                      result="effect1_dropShadow_51_925"
+                    />
+                    <feBlend
+                      mode="normal"
+                      in="SourceGraphic"
+                      in2="effect1_dropShadow_51_925"
+                      result="shape"
+                    />
+                  </filter>
+                </defs>
+              </svg>
+              <div className=" text-xs text-white">{`{你}`}</div>
+            </div>
+          </motion.div>
         </button>
 
         <motion.div
@@ -480,9 +569,7 @@ const Home: NextPage = () => {
 
       <div ref={showAboutDivRef} className={btnWe ? "z-20" : " "}>
         <button onClick={handleClickBtnWe}>
-          <motion.img
-            src={btnWe ? "./weOpen.svg" : "./we.svg"}
-            alt="btnWe"
+          <motion.div
             custom={{
               opacity: 1,
               transition: { duration: 0.8, delay: 3 * 0.8 + 2 },
@@ -490,14 +577,69 @@ const Home: NextPage = () => {
             animate={controls}
             initial={{
               position: "fixed",
-              height: 56,
-              width: 53,
               left: "82%",
               top: "80%",
               opacity: 0,
               zIndex: 999,
             }}
-          />
+          >
+            <div className=" flex flex-col items-center gap-1">
+              <svg
+                id="btnWe"
+                width="33"
+                height="36"
+                viewBox="0 0 33 36"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g filter="url(#filter0_d_51_922)">
+                  <path
+                    id="weSVG-path"
+                    d="M4.85648 27.7128L4.85648 1.52588e-05L28.8565 13.8564L4.85648 27.7128Z"
+                    fill="white"
+                  />
+                </g>
+                <defs>
+                  <filter
+                    id="filter0_d_51_922"
+                    x="0.856445"
+                    y="0"
+                    width="32"
+                    height="35.7128"
+                    filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB"
+                  >
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix
+                      in="SourceAlpha"
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      result="hardAlpha"
+                    />
+                    <feOffset dy="4" />
+                    <feGaussianBlur stdDeviation="2" />
+                    <feComposite in2="hardAlpha" operator="out" />
+                    <feColorMatrix
+                      type="matrix"
+                      values="0 0 0 0 0.729412 0 0 0 0 0.192157 0 0 0 0 0.815686 0 0 0 0.25 0"
+                    />
+                    <feBlend
+                      mode="normal"
+                      in2="BackgroundImageFix"
+                      result="effect1_dropShadow_51_922"
+                    />
+                    <feBlend
+                      mode="normal"
+                      in="SourceGraphic"
+                      in2="effect1_dropShadow_51_922"
+                      result="shape"
+                    />
+                  </filter>
+                </defs>
+              </svg>
+              <div className=" whitespace-nowrap text-xs text-white">{`{关于我们}`}</div>
+            </div>
+          </motion.div>
         </button>
 
         <motion.div
