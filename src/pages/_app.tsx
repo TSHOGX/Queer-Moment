@@ -14,8 +14,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <Head>
         <title>QUEER MOMENT</title>
         <meta name="description" content="Diary of Queer | by TX" />
-        <link rel="icon" href="/icon.svg" />
-        <link rel="apple-touch-icon" href="/icon.svg" />
+        <link rel="icon" href="%PUBLIC_URL%/icon.svg" />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon.svg" />
       </Head>
       <Component {...pageProps} />
     </SessionProvider>
