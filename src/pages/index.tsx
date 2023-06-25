@@ -247,7 +247,7 @@ const Home: NextPage = () => {
         var svgPath = document.getElementById("youSVG-path");
         console.log(svgPath);
         if (rot && svgPath) {
-          rot.style.transition = "transform 1s";
+          rot.style.transition = "transform 0.8s";
           rot.style.transform = "rotate(90deg)";
           svgPath.setAttribute("fill", "#8C24DE");
         }
@@ -255,7 +255,7 @@ const Home: NextPage = () => {
         var rot = document.getElementById("btnYou");
         var svgPath = document.getElementById("youSVG-path");
         if (rot && svgPath) {
-          rot.style.transition = "transform 1s";
+          rot.style.transition = "transform 0.8s";
           rot.style.transform = "rotate(0deg)";
           svgPath.setAttribute("fill", "white");
         }
@@ -271,7 +271,7 @@ const Home: NextPage = () => {
         var svgPath = document.getElementById("weSVG-path");
         console.log(svgPath);
         if (rot && svgPath) {
-          rot.style.transition = "transform 1s";
+          rot.style.transition = "transform 0.8s";
           rot.style.transform = "rotate(-90deg)";
           svgPath.setAttribute("fill", "#8C24DE");
         }
@@ -279,7 +279,7 @@ const Home: NextPage = () => {
         var rot = document.getElementById("btnWe");
         var svgPath = document.getElementById("weSVG-path");
         if (rot && svgPath) {
-          rot.style.transition = "transform 1s";
+          rot.style.transition = "transform 0.8s";
           rot.style.transform = "rotate(0)";
           svgPath.setAttribute("fill", "white");
         }
@@ -666,8 +666,24 @@ const Home: NextPage = () => {
           <div className="intro-contact">
             <div>关注我们</div>
             <div>
-              <div>Ins: queermoment_</div>
-              <div>小红书: Queermoment</div>
+              <div>
+                Ins:{" "}
+                <a
+                  href="https://www.instagram.com/queermoment_/"
+                  target="_blank"
+                >
+                  queermoment_
+                </a>
+              </div>
+              <div>
+                小红书:{" "}
+                <a
+                  href="https://www.xiaohongshu.com/user/profile/646ebd2b000000001c02b542"
+                  target="_blank"
+                >
+                  Queermoment
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>
