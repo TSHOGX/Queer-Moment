@@ -140,9 +140,9 @@ main {
   font-family: "Source Sans Pro", sans-serif;
   position: absolute;
   bottom: -700px;
-  padding-bottom: 80vh;
+  padding-bottom: 8vh;
   padding-top: 16vh;
-  /* overflow: scroll; */
+  margin-bottom: 80vh;
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100vh;
