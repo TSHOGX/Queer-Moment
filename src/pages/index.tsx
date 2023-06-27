@@ -764,7 +764,7 @@ const Home: NextPage = () => {
               readOnly
               name="showpost-textarea"
               style={{ resize: "none" }}
-              className="flex-auto break-words bg-transparent text-center "
+              className="flex-auto break-words bg-transparent"
               value={newPostContent}
             />
           </div>
