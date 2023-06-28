@@ -439,8 +439,9 @@ const Home: NextPage = () => {
             animate={controls}
             initial={{
               position: "fixed",
-              right: "85%",
+              left: "5%",
               top: "30%",
+              transform: "translate(50%, -50%)",
               opacity: 0,
             }}
           >
@@ -578,8 +579,9 @@ const Home: NextPage = () => {
             animate={controls}
             initial={{
               position: "fixed",
-              left: "82%",
+              right: "5%",
               top: "80%",
+              transform: "translate(-50%, -50%)",
               opacity: 0,
               zIndex: 999,
             }}
@@ -656,34 +658,52 @@ const Home: NextPage = () => {
           <div className="intro-container">
             <div className="intro-logo">
               <img src="./aboutIcon.svg" />
+              <div>关注我们</div>
             </div>
             <div className="intro-content">
               <p>
                 由酷儿群体共同撰写的时刻日记。我们希望文字可以连接时间和故事，连接着曾经、当下和未来的属于酷儿的瞬间。在声音不断被屏蔽、删除的时代，希望这里成为你的安全之地。
                 既在，记载，勿忘。 让我们共同度过。
               </p>
-            </div>
-          </div>
-          <div className="intro-contact">
-            <div>关注我们</div>
-            <div>
               <div>
-                Ins:{" "}
-                <a
-                  href="https://www.instagram.com/queermoment_/"
-                  target="_blank"
-                >
-                  queermoment_
-                </a>
-              </div>
-              <div>
-                小红书:{" "}
-                <a
-                  href="https://www.xiaohongshu.com/user/profile/646ebd2b000000001c02b542"
-                  target="_blank"
-                >
-                  Queermoment
-                </a>
+                <div className=" flex flex-row items-center gap-2">
+                  小红书{" "}
+                  <a
+                    href="https://www.xiaohongshu.com/user/profile/646ebd2b000000001c02b542"
+                    target="_blank"
+                  >
+                    @Queermoment
+                  </a>
+                  <a
+                    href="https://www.xiaohongshu.com/user/profile/646ebd2b000000001c02b542"
+                    target="_blank"
+                  >
+                    <img
+                      src="./link.svg"
+                      alt="link"
+                      className=" h-3 opacity-80 sm:h-5"
+                    />
+                  </a>
+                </div>
+                <div className=" flex flex-row items-center gap-2">
+                  Instagram{" "}
+                  <a
+                    href="https://www.instagram.com/queermoment_/"
+                    target="_blank"
+                  >
+                    @queermoment_
+                  </a>
+                  <a
+                    href="https://www.instagram.com/queermoment_/"
+                    target="_blank"
+                  >
+                    <img
+                      src="./link.svg"
+                      alt="link"
+                      className=" h-3 opacity-80 sm:h-5"
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -743,6 +763,7 @@ const Home: NextPage = () => {
 
       {/* show post */}
       <motion.div
+        className="show-post"
         initial={{ opacity: 0, zIndex: -9999, top: "40%", position: "fixed" }}
         animate={
           showPost && !btnWe && !btnYou
