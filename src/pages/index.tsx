@@ -36,7 +36,7 @@ const Home: NextPage = () => {
   const [name, setName] = useState("");
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
   const [posts, setPosts] = useState<Post[]>([]);
-  const [showBar, setShowBar] = useState(false);
+  // const [showBar, setShowBar] = useState(false);
   const [showPost, setShowPost] = useState(false);
   const [newPostContent, setNewPostContent] = useState("");
   const [newPostId, setNewPostId] = useState(-1);
@@ -57,7 +57,7 @@ const Home: NextPage = () => {
       if (!btnWe && !btnYou) {
         // console.log("in", btnWe, btnYou);
         li.addEventListener("click", () => {
-          console.log("enter event listener");
+          // console.log("enter event listener");
           if (whiteTracker === 1) {
             liElements.forEach((li) => {
               li.style.backgroundColor = "";
@@ -76,7 +76,7 @@ const Home: NextPage = () => {
           } else {
             // Reset styles of the previous li element
             if (previousLi) {
-              console.log("change back");
+              // console.log("change back");
               previousLi.style.backgroundColor = "";
               previousLi.style.color = "";
             }
@@ -178,10 +178,11 @@ const Home: NextPage = () => {
         setContent("");
         setName("");
         setBtnYou(false);
-        setShowBar(true);
-        setTimeout(() => {
-          setShowBar(false);
-        }, 2000);
+        // setShowBar(true);
+        handleClickBtnYou();
+        // setTimeout(() => {
+        //   setShowBar(false);
+        // }, 2000);
         fetchAll();
         console.log("form submitted successfully !!!");
       }
@@ -245,7 +246,7 @@ const Home: NextPage = () => {
       if (!btnYou) {
         var rot = document.getElementById("btnYou");
         var svgPath = document.getElementById("youSVG-path");
-        console.log(svgPath);
+        // console.log(svgPath);
         if (rot && svgPath) {
           rot.style.transition = "transform 0.8s";
           rot.style.transform = "rotate(90deg)";
@@ -269,7 +270,7 @@ const Home: NextPage = () => {
       if (!btnWe) {
         var rot = document.getElementById("btnWe");
         var svgPath = document.getElementById("weSVG-path");
-        console.log(svgPath);
+        // console.log(svgPath);
         if (rot && svgPath) {
           rot.style.transition = "transform 0.8s";
           rot.style.transform = "rotate(-90deg)";
@@ -364,7 +365,7 @@ const Home: NextPage = () => {
   // other fetches - scroll to new post position
   useEffect(() => {
     if (fetchCount) {
-      console.log("scroll animation", scrollToRef.current?.value);
+      // console.log("scroll animation", scrollToRef.current?.value);
       if (scrollToRef.current) {
         scrollToRef.current.scrollIntoView({
           behavior: "smooth",
@@ -467,9 +468,9 @@ const Home: NextPage = () => {
                     width="35.7129"
                     height="32"
                     filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB"
+                    colorInterpolationFilters="sRGB"
                   >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
                     <feColorMatrix
                       in="SourceAlpha"
                       type="matrix"
@@ -607,9 +608,9 @@ const Home: NextPage = () => {
                     width="32"
                     height="35.7128"
                     filterUnits="userSpaceOnUse"
-                    color-interpolation-filters="sRGB"
+                    colorInterpolationFilters="sRGB"
                   >
-                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feFlood floodOpacity="0" result="BackgroundImageFix" />
                     <feColorMatrix
                       in="SourceAlpha"
                       type="matrix"
@@ -709,9 +710,9 @@ const Home: NextPage = () => {
             ref={scrollToRef}
             initial={{ opacity: 0 }}
             animate={{
-              opacity: [0.3, 1],
+              opacity: [0, 1],
             }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 2.5 }}
           >
             {`${new Date(post.date).getFullYear()} {${(
               new Date(post.date).getMonth() + 1
@@ -725,7 +726,7 @@ const Home: NextPage = () => {
         ))}
       </motion.ul>
 
-      {showBar && (
+      {/* {showBar && (
         <motion.div
           animate={{ opacity: [1, 0], transition: { duration: 1.5 } }}
           initial={{
@@ -738,7 +739,7 @@ const Home: NextPage = () => {
             opacity: 0,
           }}
         />
-      )}
+      )} */}
 
       {/* show post */}
       <motion.div
