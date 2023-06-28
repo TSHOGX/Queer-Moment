@@ -157,6 +157,7 @@ const Home: NextPage = () => {
         !showAboutDivRef.current.contains(event.target)
       ) {
         setBtnWe(false);
+        handleClickBtnWe();
       }
     }
     window.addEventListener("click", handleClick);
