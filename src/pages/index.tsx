@@ -41,6 +41,7 @@ const Home: NextPage = () => {
   const [newPostContent, setNewPostContent] = useState("");
   const [newPostId, setNewPostId] = useState(-1);
   const [fetchCount, setFetchCount] = useState(-1);
+  // const [dialog, setDialog] = useState<HTMLDivElement | null>(null);
   const scrollToRef = useRef<HTMLLIElement>(null);
 
   // white bar
@@ -135,13 +136,52 @@ const Home: NextPage = () => {
 
   // const showFormDivRef = useRef<HTMLDivElement>(null);
   // useEffect(() => {
+  //   const handleClick = () => {
+  //     const dialogElement = document.querySelectorAll('[role="dialog"]')[0] as
+  //       | HTMLDivElement
+  //       | undefined;
+  //     if (dialogElement) {
+  //       setDialog(dialogElement);
+  //       // console.log("dialogElement", dialogElement);
+  //     }
+  //   };
+  //   document.addEventListener("click", handleClick);
+  //   return () => {
+  //     document.removeEventListener("click", handleClick);
+  //   };
+  // }, []);
+  // useEffect(() => {
   //   if (!btnYou) return;
   //   function handleClick(event: { target: any }) {
+  //     // console.log(event.target);  // why is it show nothing after change calendar year or month???
   //     if (
   //       showFormDivRef.current &&
   //       !showFormDivRef.current.contains(event.target)
   //     ) {
-  //       setBtnYou(false);
+  //       const { target } = event;
+  //       if (
+  //         target.getAttribute("role") != "gridcell" &&
+  //         target.getAttribute("tabindex") !== "0"
+  //       ) {
+  //         if (
+  //           !(
+  //             target.getAttribute("type") === "button" &&
+  //             target.getAttribute("tabindex") === "0"
+  //           )
+  //         ) {
+  //           if (dialog) {
+  //             // console.log(event.target);
+  //             // console.log(dialog);
+  //             if (!dialog.contains(showFormDivRef.current)) {
+  //               setBtnYou(false);
+  //               handleClickBtnYou();
+  //             }
+  //           } else {
+  //             setBtnYou(false);
+  //             handleClickBtnYou();
+  //           }
+  //         }
+  //       }
   //     }
   //   }
   //   window.addEventListener("click", handleClick);

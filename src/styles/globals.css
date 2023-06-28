@@ -238,6 +238,8 @@ main {
     font-size: 20px;
   }
   .posts {
+    margin-left: 40vw;
+    width: 55vw;
     font-size: 20px;
   }
   .form-div {
