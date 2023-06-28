@@ -135,8 +135,8 @@ main {
 
 /* calendar */
 .posts {
-  margin-left: 32%;
-  max-width: 67vw;
+  margin-left: 32vw;
+  width: 64vw;
   font-size: 3vw;
   color: white;
   font-family: "Source Sans Pro", sans-serif;
